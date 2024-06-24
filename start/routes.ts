@@ -15,7 +15,7 @@ router.delete('/users/:id', [UsersController, 'destroy'])
 router.patch('/users/:id', [UsersController, 'update'])
 
 router.get('/blogs', [BlogController, 'index'])
-router.patch('/blogs/:id', [BlogController, 'store'])
+router.post('/blogs/:id/', [BlogController, 'store'])
 router.get('/blogs/:id', [BlogController, 'show'])
 router.delete('/blogs/:id', [BlogController, 'destroy'])
 router.patch('/blogs/:id', [BlogController, 'update'])

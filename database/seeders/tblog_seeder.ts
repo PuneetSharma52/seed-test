@@ -5,6 +5,8 @@ import { BaseSeeder } from '@adonisjs/lucid/seeders'
 export default class extends BaseSeeder {
   async run() {
     console.log('This is running in blog seeder')
+    // const ids = await db.from('users').select('id').exec()
+    // console.log(ids)
     await BlogFactory.createMany(20)
     // const data = await db.from('user_blogs').select('id', 'user_id', 'blog_id').exec()
     // console.log(data)

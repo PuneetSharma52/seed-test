@@ -10,10 +10,10 @@ export const BlogFactory = factory
     // console.log('It is running')
     return {
       id: faker.string.uuid(),
+      user_id: faker.helpers.arrayElement(users).id,
       title: faker.lorem.sentence(),
       description: faker.lorem.paragraphs(5),
-      tags: faker.lorem.word(),
-      users: faker.helpers.arrayElement(users).id,
+      // tags: faker.lorem.word(),
     }
   })
   .build()

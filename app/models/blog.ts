@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
-import User from './user.js'
+import Tag from './tag.js'
+// import User from './user.js'
 // import User from './user.js'
 import * as relations from '@adonisjs/lucid/types/relations'
 
@@ -8,8 +9,8 @@ export default class Blog extends BaseModel {
   @column({ isPrimary: true })
   declare id: string
 
-  // @column()
-  // declare user_id: string
+  @column()
+  declare user_id: string
 
   @column()
   declare title: string
@@ -17,8 +18,8 @@ export default class Blog extends BaseModel {
   @column()
   declare description: string
 
-  @column()
-  declare tags: String[5]
+  // @column()
+  // declare tags: String[5]
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -26,13 +27,13 @@ export default class Blog extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @manyToMany(() => User, {
-    pivotTable: 'user_blog',
+  @manyToMany(() => Tag, {
+    pivotTable: 'blog_tag',
 
     localKey: 'id',
     pivotForeignKey: 'blog_id',
     relatedKey: 'id',
-    pivotRelatedForeignKey: 'user_id',
+    pivotRelatedForeignKey: 'tag_id',
   })
-  declare users: relations.ManyToMany<typeof User>
+  declare tags: relations.ManyToMany<typeof Tag>
 }
