@@ -1,12 +1,17 @@
 import Blog from '#models/blog'
+import User from '#models/user'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class BlogController {
   async store({ request, response }: HttpContext) {
     const body = request.body()
+    console.log({ qs: request.qs })
+    const userId = request.params()
+    console.log({ userId })
 
-    const blog = await Blog.create(body)
+    const user = await User.findOrFail(userId)
 
+    const blog = await user.related('blogs').create(body)
     response.status(201)
 
     return {

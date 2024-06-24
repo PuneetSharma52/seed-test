@@ -29,15 +29,12 @@ export default class User extends BaseModel {
   // declare blogs: relations.HasMany<typeof Blog>
 
   @manyToMany(() => Blog, {
-    pivotTable: 'user_blogs',
-    // pivotTimestamps: {
-    //   createdAt: 'creation_date',
-    //   updatedAt: 'updation_date',
-    // },
-    // localKey: 'id',
-    // pivotForeignKey: 'user_id',
-    // relatedKey: 'id',
-    // pivotRelatedForeignKey: 'blog_id',
+    pivotTable: 'user_blog',
+
+    localKey: 'id',
+    pivotForeignKey: 'user_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'blog_id',
   })
   declare blogs: relations.ManyToMany<typeof Blog>
 }
