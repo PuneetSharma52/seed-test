@@ -1,13 +1,18 @@
 import Blog from '#models/blog'
 import User from '#models/user'
 import { HttpContext } from '@adonisjs/core/http'
+import logger from '@adonisjs/core/services/logger'
+import { error } from 'node:console'
 
 export default class BlogController {
   async store({ request, response }: HttpContext) {
     const body = request.body()
     console.log({ qs: request.qs })
     const userId = request.params()
-    console.log({ userId })
+    console.info({ userId })
+
+    logger.info('this is an info message')
+    logger.error({ err: error }, 'Something went wrong')
 
     const user = await User.findOrFail(userId)
 
