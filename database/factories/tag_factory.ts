@@ -10,7 +10,7 @@ export const TagFactory = factory
     return {
       id: faker.string.uuid(),
       tags: faker.lorem.word(),
-      blogs: faker.helpers.arrayElement(blogs).id,
+      // blogs: faker.helpers.arrayElement(blogs).id,
     }
   })
   .build()
