@@ -1,6 +1,9 @@
+import { BlogFactory } from '#database/factories/blog_factory'
+import { TagFactory } from '#database/factories/tag_factory'
 import { UserFactory } from '#database/factories/user_factory'
 import User from '#models/user'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import db from '@adonisjs/lucid/services/db'
 import { faker } from '@faker-js/faker/locale/en_IN'
 
 export default class extends BaseSeeder {
@@ -44,5 +47,18 @@ export default class extends BaseSeeder {
       },
     ])
     await UserFactory.createMany(5)
+    await BlogFactory.createMany(20)
+    await TagFactory.createMany(20)
+    const blogs = await db.from('blogs').select('id').exec()
+    // console.log({ blogs })
+    const tags = await db.from('tags').select('id').exec()
+    // console.log({ tags })
+    const blogTags = blogs.map((blog) => {
+      return { blog_id: blog.id, tag_id: faker.helpers.arrayElement(tags).id }
+    })
+    // console.log(blogTags)
+    // const data =
+    await db.table('blog_tags').multiInsert(blogTags).exec()
+    // console.log(data)
   }
 }

@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
       table.uuid('blog_id').references('blogs.id')
       table.uuid('tag_id').references('tags.id')
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      // table.timestamp('created_at')
+      // table.timestamp('updated_at')
     })
   }
 

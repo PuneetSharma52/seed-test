@@ -5,7 +5,7 @@ import { HttpContext } from '@adonisjs/core/http'
 export default class BlogController {
   async store({ request, response }: HttpContext) {
     const body = request.body()
-    console.log({ qs: request.qs })
+    console.log({ qs: request.qs() })
     const userId = request.params()
     console.info({ userId })
 
