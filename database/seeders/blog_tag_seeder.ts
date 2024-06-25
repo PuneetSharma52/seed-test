@@ -9,7 +9,7 @@ export default class extends BaseSeeder {
     const blog_tags = blogs.map((blog) => {
       return { blog_id: blog.id, tag_id: faker.helpers.arrayElement(tags).id }
     })
-    const data = await db.table('user_blog').multiInsert(blog_tags).exec()
+    const data = await db.table('blog_tag').multiInsert(blog_tags).exec()
     console.log(data)
   }
 }
