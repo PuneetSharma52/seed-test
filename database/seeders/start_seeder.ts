@@ -56,9 +56,19 @@ export default class extends BaseSeeder {
     const blogTags = blogs.map((blog) => {
       return { blog_id: blog.id, tag_id: faker.helpers.arrayElement(tags).id }
     })
-    // console.log(blogTags)
-    // const data =
-    await db.table('blog_tags').multiInsert(blogTags).exec()
-    // console.log(data)
+    // This is the implementation of transactions in a manually assigned try/catch block
+    // const trx = await db.transaction()
+    // try {
+    //   await trx.table('blog_tags').multiInsert(blogTags).exec()
+    //   await trx.commit()
+    // } catch (error) {
+    //   await trx.rollback()
+    // }
+    // This is the managaed transaction
+    await db.transaction(async (trx) => {
+      const response = await trx.table('blog_tags').multiInsert(blogTags).exec()
+
+      console.log(response)
+    })
   }
 }
